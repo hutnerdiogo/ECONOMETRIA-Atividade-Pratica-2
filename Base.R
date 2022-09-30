@@ -31,5 +31,19 @@ rownames(excessos) <- data$Data
 excessos
 #### Questão 4 ####
 
-ativos <- c("BBSA3","PETR4","CMIG4")
-CAPM_BBSA3 <- lr()
+#("BBSA3","PETR4","CMIG4")
+
+# Ativo BBSA3
+CAPM_BBSA3 <- lm(BBSA3 ~ MKT,data = data)
+summary(CAPM_BBSA3)
+
+CAPM_BBSA3_SEM_ALFA <- lm(BBSA3 ~ MKT + 0,data = data)
+summary(CAPM_BBSA3_SEM_ALFA)
+
+# Ativo PETR4
+CAPM_PETR4 <- lm(PETR4 ~ MKT,data = data)
+summary(CAPM_PETR4)
+
+# Ativo CMIG4
+CAPM_CMIG4 <- lm(CMIG4 ~ MKT,data = data)
+summary(CAPM_CMIG4)
