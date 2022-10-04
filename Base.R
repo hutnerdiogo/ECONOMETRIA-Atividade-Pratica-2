@@ -1,4 +1,10 @@
+#### Questão 0 ####
+#Importando Modulos
+#install.packages("stargazer")
+library(stargazer)
+
 #### Questão 1 ####
+
 #Importando os dados e corrigindo
 data <- read.csv("ArquivoExercicio2.csv",sep=";",header=TRUE)
 
@@ -51,3 +57,36 @@ summary(CAPM_PETR4)
 # Ativo CMIG4
 CAPM_CMIG4 <- lm(CMIG4 ~ MKT,data = data)
 summary(CAPM_CMIG4)
+
+#### Questão 5 ####
+#Analise o poder explicativo -> Docs da Joana
+
+#### Questão 6 ####
+modelo_FFC_BBSA3 <- lm(BBSA3 - RF ~ MKT + SMB + HML + WML,data=data)
+summary(modelo_FFC_BBSA3)
+
+modelo_FFC_PETR4 <- lm(PETR4 - RF ~ MKT + SMB + HML + WML,data=data)
+summary(modelo_FFC_PETR4)
+
+modelo_FFC_CMIG4 <- lm(CMIG4 - RF ~ MKT + SMB + HML + WML,data=data)
+summary(modelo_FFC_CMIG4)
+
+#### Questão 7 ####
+modelo_FF_BBSA3 <- lm(BBSA3 - RF ~ MKT + SMB + HML,data=data)
+summary(modelo_FF_BBSA3)
+
+modelo_FF_PETR4 <- lm(PETR4 - RF ~ MKT + SMB + HML,data=data)
+summary(modelo_FF_PETR4)
+
+modelo_FF_CMIG4 <- lm(CMIG4 - RF ~ MKT + SMB + HML,data=data)
+summary(modelo_FF_CMIG4)
+
+
+# Testes
+
+##  Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.
+stargazer(CAPM_BBSA3,modelo_FFC_BBSA3,modelo_FF_BBSA3, type = "html", title = "Comparação de regressões - BBSA3",
+          dep.var.labels=c("CAPM","Fama-French-Carhart","Fama-French"))
+summary(modelo_FFC_BBSA3)
+
+
