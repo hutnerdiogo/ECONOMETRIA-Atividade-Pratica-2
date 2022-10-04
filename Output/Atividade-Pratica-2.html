@@ -536,96 +536,129 @@ modelo_FF_PETR4 &lt;- lm(PETR4 - RF ~ MKT + SMB + HML,data=data)
 modelo_FF_CMIG4 &lt;- lm(CMIG4 - RF ~ MKT + SMB + HML,data=data)</code></pre>
 <div id="bbsa3-1" class="section level3">
 <h3>BBSA3</h3>
-<pre class="r"><code>stargazer(CAPM_BBSA3,modelo_FFC_BBSA3,modelo_FF_BBSA3, type = &quot;html&quot;, title = &quot;Comparação de regressões - BBSA3&quot;,
+<pre class="r"><code>stargazer(CAPM_BBSA3,modelo_FFC_BBSA3,modelo_FF_BBSA3, title = &quot;Comparação de regressões - BBSA3&quot;,
           column.labels=c(&quot;CAPM&quot;,&quot;Fama-French-Carhart&quot;,&quot;Fama-French&quot;),
           dep.var.labels.include=F)</code></pre>
 <pre><code>## 
-## &lt;table style=&quot;text-align:center&quot;&gt;&lt;caption&gt;&lt;strong&gt;Comparação de regressões - BBSA3&lt;/strong&gt;&lt;/caption&gt;
-## &lt;tr&gt;&lt;td colspan=&quot;4&quot; style=&quot;border-bottom: 1px solid black&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td colspan=&quot;3&quot;&gt;&lt;em&gt;Dependent variable:&lt;/em&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td colspan=&quot;3&quot; style=&quot;border-bottom: 1px solid black&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;CAPM&lt;/td&gt;&lt;td&gt;Fama-French-Carhart&lt;/td&gt;&lt;td&gt;Fama-French&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;(1)&lt;/td&gt;&lt;td&gt;(2)&lt;/td&gt;&lt;td&gt;(3)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td colspan=&quot;4&quot; style=&quot;border-bottom: 1px solid black&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;MKT&lt;/td&gt;&lt;td&gt;1.296&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;1.304&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;1.304&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;(0.036)&lt;/td&gt;&lt;td&gt;(0.036)&lt;/td&gt;&lt;td&gt;(0.036)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;SMB&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;-0.102&lt;/td&gt;&lt;td&gt;-0.102&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.075)&lt;/td&gt;&lt;td&gt;(0.075)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;HML&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;0.321&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;0.321&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.098)&lt;/td&gt;&lt;td&gt;(0.098)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;Constant&lt;/td&gt;&lt;td&gt;-0.001&lt;/td&gt;&lt;td&gt;-0.001&lt;sup&gt;*&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;-0.001&lt;sup&gt;*&lt;/sup&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;(0.001)&lt;/td&gt;&lt;td&gt;(0.001)&lt;/td&gt;&lt;td&gt;(0.001)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td colspan=&quot;4&quot; style=&quot;border-bottom: 1px solid black&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;Observations&lt;/td&gt;&lt;td&gt;547&lt;/td&gt;&lt;td&gt;547&lt;/td&gt;&lt;td&gt;547&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;R&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;0.703&lt;/td&gt;&lt;td&gt;0.709&lt;/td&gt;&lt;td&gt;0.709&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;Adjusted R&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;0.702&lt;/td&gt;&lt;td&gt;0.707&lt;/td&gt;&lt;td&gt;0.707&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;Residual Std. Error&lt;/td&gt;&lt;td&gt;0.017 (df = 545)&lt;/td&gt;&lt;td&gt;0.017 (df = 543)&lt;/td&gt;&lt;td&gt;0.017 (df = 543)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;F Statistic&lt;/td&gt;&lt;td&gt;1,288.803&lt;sup&gt;***&lt;/sup&gt; (df = 1; 545)&lt;/td&gt;&lt;td&gt;440.272&lt;sup&gt;***&lt;/sup&gt; (df = 3; 543)&lt;/td&gt;&lt;td&gt;440.272&lt;sup&gt;***&lt;/sup&gt; (df = 3; 543)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td colspan=&quot;4&quot; style=&quot;border-bottom: 1px solid black&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;em&gt;Note:&lt;/em&gt;&lt;/td&gt;&lt;td colspan=&quot;3&quot; style=&quot;text-align:right&quot;&gt;&lt;sup&gt;*&lt;/sup&gt;p&lt;0.1; &lt;sup&gt;**&lt;/sup&gt;p&lt;0.05; &lt;sup&gt;***&lt;/sup&gt;p&lt;0.01&lt;/td&gt;&lt;/tr&gt;
-## &lt;/table&gt;</code></pre>
+## % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+## % Date and time: ter, out 04, 2022 - 16:47:11
+## \begin{table}[!htbp] \centering 
+##   \caption{Comparação de regressões - BBSA3} 
+##   \label{} 
+## \begin{tabular}{@{\extracolsep{5pt}}lccc} 
+## \\[-1.8ex]\hline 
+## \hline \\[-1.8ex] 
+##  &amp; \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+## \cline{2-4} 
+##  &amp; CAPM &amp; Fama-French-Carhart &amp; Fama-French \\ 
+## \\[-1.8ex] &amp; (1) &amp; (2) &amp; (3)\\ 
+## \hline \\[-1.8ex] 
+##  MKT &amp; 1.296$^{***}$ &amp; 1.304$^{***}$ &amp; 1.304$^{***}$ \\ 
+##   &amp; (0.036) &amp; (0.036) &amp; (0.036) \\ 
+##   &amp; &amp; &amp; \\ 
+##  SMB &amp;  &amp; $-$0.102 &amp; $-$0.102 \\ 
+##   &amp;  &amp; (0.075) &amp; (0.075) \\ 
+##   &amp; &amp; &amp; \\ 
+##  HML &amp;  &amp; 0.321$^{***}$ &amp; 0.321$^{***}$ \\ 
+##   &amp;  &amp; (0.098) &amp; (0.098) \\ 
+##   &amp; &amp; &amp; \\ 
+##  Constant &amp; $-$0.001 &amp; $-$0.001$^{*}$ &amp; $-$0.001$^{*}$ \\ 
+##   &amp; (0.001) &amp; (0.001) &amp; (0.001) \\ 
+##   &amp; &amp; &amp; \\ 
+## \hline \\[-1.8ex] 
+## Observations &amp; 547 &amp; 547 &amp; 547 \\ 
+## R$^{2}$ &amp; 0.703 &amp; 0.709 &amp; 0.709 \\ 
+## Adjusted R$^{2}$ &amp; 0.702 &amp; 0.707 &amp; 0.707 \\ 
+## Residual Std. Error &amp; 0.017 (df = 545) &amp; 0.017 (df = 543) &amp; 0.017 (df = 543) \\ 
+## F Statistic &amp; 1,288.803$^{***}$ (df = 1; 545) &amp; 440.272$^{***}$ (df = 3; 543) &amp; 440.272$^{***}$ (df = 3; 543) \\ 
+## \hline 
+## \hline \\[-1.8ex] 
+## \textit{Note:}  &amp; \multicolumn{3}{r}{$^{*}$p$&lt;$0.1; $^{**}$p$&lt;$0.05; $^{***}$p$&lt;$0.01} \\ 
+## \end{tabular} 
+## \end{table}</code></pre>
 </div>
 <div id="petr4-1" class="section level3">
 <h3>PETR4</h3>
-<pre class="r"><code>stargazer(CAPM_PETR4,modelo_FFC_PETR4,modelo_FF_PETR4, type = &quot;html&quot;, title = &quot;Comparação de regressões - PETR4&quot;,
-          column.labels=c(&quot;CAPM&quot;,&quot;Fama-French-Carhart&quot;,&quot;Fama-French&quot;),
-          dep.var.labels.include=F)</code></pre>
 <pre><code>## 
-## &lt;table style=&quot;text-align:center&quot;&gt;&lt;caption&gt;&lt;strong&gt;Comparação de regressões - PETR4&lt;/strong&gt;&lt;/caption&gt;
-## &lt;tr&gt;&lt;td colspan=&quot;4&quot; style=&quot;border-bottom: 1px solid black&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td colspan=&quot;3&quot;&gt;&lt;em&gt;Dependent variable:&lt;/em&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td colspan=&quot;3&quot; style=&quot;border-bottom: 1px solid black&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;CAPM&lt;/td&gt;&lt;td&gt;Fama-French-Carhart&lt;/td&gt;&lt;td&gt;Fama-French&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;(1)&lt;/td&gt;&lt;td&gt;(2)&lt;/td&gt;&lt;td&gt;(3)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td colspan=&quot;4&quot; style=&quot;border-bottom: 1px solid black&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;MKT&lt;/td&gt;&lt;td&gt;1.445&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;1.459&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;1.459&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;(0.057)&lt;/td&gt;&lt;td&gt;(0.057)&lt;/td&gt;&lt;td&gt;(0.057)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;SMB&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;-0.192&lt;/td&gt;&lt;td&gt;-0.192&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.119)&lt;/td&gt;&lt;td&gt;(0.119)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;HML&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;0.405&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;0.405&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.156)&lt;/td&gt;&lt;td&gt;(0.156)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;Constant&lt;/td&gt;&lt;td&gt;-0.001&lt;/td&gt;&lt;td&gt;-0.001&lt;/td&gt;&lt;td&gt;-0.001&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;(0.001)&lt;/td&gt;&lt;td&gt;(0.001)&lt;/td&gt;&lt;td&gt;(0.001)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td colspan=&quot;4&quot; style=&quot;border-bottom: 1px solid black&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;Observations&lt;/td&gt;&lt;td&gt;547&lt;/td&gt;&lt;td&gt;547&lt;/td&gt;&lt;td&gt;547&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;R&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;0.539&lt;/td&gt;&lt;td&gt;0.545&lt;/td&gt;&lt;td&gt;0.545&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;Adjusted R&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;0.538&lt;/td&gt;&lt;td&gt;0.542&lt;/td&gt;&lt;td&gt;0.542&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;Residual Std. Error&lt;/td&gt;&lt;td&gt;0.027 (df = 545)&lt;/td&gt;&lt;td&gt;0.027 (df = 543)&lt;/td&gt;&lt;td&gt;0.027 (df = 543)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;F Statistic&lt;/td&gt;&lt;td&gt;636.688&lt;sup&gt;***&lt;/sup&gt; (df = 1; 545)&lt;/td&gt;&lt;td&gt;216.726&lt;sup&gt;***&lt;/sup&gt; (df = 3; 543)&lt;/td&gt;&lt;td&gt;216.726&lt;sup&gt;***&lt;/sup&gt; (df = 3; 543)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td colspan=&quot;4&quot; style=&quot;border-bottom: 1px solid black&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;em&gt;Note:&lt;/em&gt;&lt;/td&gt;&lt;td colspan=&quot;3&quot; style=&quot;text-align:right&quot;&gt;&lt;sup&gt;*&lt;/sup&gt;p&lt;0.1; &lt;sup&gt;**&lt;/sup&gt;p&lt;0.05; &lt;sup&gt;***&lt;/sup&gt;p&lt;0.01&lt;/td&gt;&lt;/tr&gt;
-## &lt;/table&gt;</code></pre>
+## % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+## % Date and time: ter, out 04, 2022 - 16:47:12
+## \begin{table}[!htbp] \centering 
+##   \caption{Comparação de regressões - PETR4} 
+##   \label{} 
+## \begin{tabular}{@{\extracolsep{5pt}}lccc} 
+## \\[-1.8ex]\hline 
+## \hline \\[-1.8ex] 
+##  &amp; \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+## \cline{2-4} 
+##  &amp; CAPM &amp; Fama-French-Carhart &amp; Fama-French \\ 
+## \\[-1.8ex] &amp; (1) &amp; (2) &amp; (3)\\ 
+## \hline \\[-1.8ex] 
+##  MKT &amp; 1.445$^{***}$ &amp; 1.459$^{***}$ &amp; 1.459$^{***}$ \\ 
+##   &amp; (0.057) &amp; (0.057) &amp; (0.057) \\ 
+##   &amp; &amp; &amp; \\ 
+##  SMB &amp;  &amp; $-$0.192 &amp; $-$0.192 \\ 
+##   &amp;  &amp; (0.119) &amp; (0.119) \\ 
+##   &amp; &amp; &amp; \\ 
+##  HML &amp;  &amp; 0.405$^{***}$ &amp; 0.405$^{***}$ \\ 
+##   &amp;  &amp; (0.156) &amp; (0.156) \\ 
+##   &amp; &amp; &amp; \\ 
+##  Constant &amp; $-$0.001 &amp; $-$0.001 &amp; $-$0.001 \\ 
+##   &amp; (0.001) &amp; (0.001) &amp; (0.001) \\ 
+##   &amp; &amp; &amp; \\ 
+## \hline \\[-1.8ex] 
+## Observations &amp; 547 &amp; 547 &amp; 547 \\ 
+## R$^{2}$ &amp; 0.539 &amp; 0.545 &amp; 0.545 \\ 
+## Adjusted R$^{2}$ &amp; 0.538 &amp; 0.542 &amp; 0.542 \\ 
+## Residual Std. Error &amp; 0.027 (df = 545) &amp; 0.027 (df = 543) &amp; 0.027 (df = 543) \\ 
+## F Statistic &amp; 636.688$^{***}$ (df = 1; 545) &amp; 216.726$^{***}$ (df = 3; 543) &amp; 216.726$^{***}$ (df = 3; 543) \\ 
+## \hline 
+## \hline \\[-1.8ex] 
+## \textit{Note:}  &amp; \multicolumn{3}{r}{$^{*}$p$&lt;$0.1; $^{**}$p$&lt;$0.05; $^{***}$p$&lt;$0.01} \\ 
+## \end{tabular} 
+## \end{table}</code></pre>
 </div>
 <div id="cmig4-1" class="section level3">
 <h3>CMIG4</h3>
-<pre class="r"><code>stargazer(CAPM_CMIG4,modelo_FFC_CMIG4,modelo_FF_CMIG4, type = &quot;html&quot;, title = &quot;Comparação de regressões - CMIG4&quot;,
+<pre class="r"><code>stargazer(CAPM_CMIG4,modelo_FFC_CMIG4,modelo_FF_CMIG4, title = &quot;Comparação de regressões - CMIG4&quot;,
           column.labels=c(&quot;CAPM&quot;,&quot;Fama-French-Carhart&quot;,&quot;Fama-French&quot;),
           dep.var.labels.include=F)</code></pre>
 <pre><code>## 
-## &lt;table style=&quot;text-align:center&quot;&gt;&lt;caption&gt;&lt;strong&gt;Comparação de regressões - CMIG4&lt;/strong&gt;&lt;/caption&gt;
-## &lt;tr&gt;&lt;td colspan=&quot;4&quot; style=&quot;border-bottom: 1px solid black&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td colspan=&quot;3&quot;&gt;&lt;em&gt;Dependent variable:&lt;/em&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td colspan=&quot;3&quot; style=&quot;border-bottom: 1px solid black&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;CAPM&lt;/td&gt;&lt;td&gt;Fama-French-Carhart&lt;/td&gt;&lt;td&gt;Fama-French&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;(1)&lt;/td&gt;&lt;td&gt;(2)&lt;/td&gt;&lt;td&gt;(3)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td colspan=&quot;4&quot; style=&quot;border-bottom: 1px solid black&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;MKT&lt;/td&gt;&lt;td&gt;1.075&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;1.084&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;1.084&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;(0.037)&lt;/td&gt;&lt;td&gt;(0.036)&lt;/td&gt;&lt;td&gt;(0.036)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;SMB&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;-0.049&lt;/td&gt;&lt;td&gt;-0.049&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.074)&lt;/td&gt;&lt;td&gt;(0.074)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;HML&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;0.548&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;0.548&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.097)&lt;/td&gt;&lt;td&gt;(0.097)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;Constant&lt;/td&gt;&lt;td&gt;-0.0003&lt;/td&gt;&lt;td&gt;-0.0004&lt;/td&gt;&lt;td&gt;-0.0004&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;(0.001)&lt;/td&gt;&lt;td&gt;(0.001)&lt;/td&gt;&lt;td&gt;(0.001)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td colspan=&quot;4&quot; style=&quot;border-bottom: 1px solid black&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;Observations&lt;/td&gt;&lt;td&gt;547&lt;/td&gt;&lt;td&gt;547&lt;/td&gt;&lt;td&gt;547&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;R&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;0.613&lt;/td&gt;&lt;td&gt;0.636&lt;/td&gt;&lt;td&gt;0.636&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;Adjusted R&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;0.613&lt;/td&gt;&lt;td&gt;0.634&lt;/td&gt;&lt;td&gt;0.634&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;Residual Std. Error&lt;/td&gt;&lt;td&gt;0.017 (df = 545)&lt;/td&gt;&lt;td&gt;0.017 (df = 543)&lt;/td&gt;&lt;td&gt;0.017 (df = 543)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;F Statistic&lt;/td&gt;&lt;td&gt;864.041&lt;sup&gt;***&lt;/sup&gt; (df = 1; 545)&lt;/td&gt;&lt;td&gt;316.587&lt;sup&gt;***&lt;/sup&gt; (df = 3; 543)&lt;/td&gt;&lt;td&gt;316.587&lt;sup&gt;***&lt;/sup&gt; (df = 3; 543)&lt;/td&gt;&lt;/tr&gt;
-## &lt;tr&gt;&lt;td colspan=&quot;4&quot; style=&quot;border-bottom: 1px solid black&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;text-align:left&quot;&gt;&lt;em&gt;Note:&lt;/em&gt;&lt;/td&gt;&lt;td colspan=&quot;3&quot; style=&quot;text-align:right&quot;&gt;&lt;sup&gt;*&lt;/sup&gt;p&lt;0.1; &lt;sup&gt;**&lt;/sup&gt;p&lt;0.05; &lt;sup&gt;***&lt;/sup&gt;p&lt;0.01&lt;/td&gt;&lt;/tr&gt;
-## &lt;/table&gt;</code></pre>
+## % Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+## % Date and time: ter, out 04, 2022 - 16:47:12
+## \begin{table}[!htbp] \centering 
+##   \caption{Comparação de regressões - CMIG4} 
+##   \label{} 
+## \begin{tabular}{@{\extracolsep{5pt}}lccc} 
+## \\[-1.8ex]\hline 
+## \hline \\[-1.8ex] 
+##  &amp; \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+## \cline{2-4} 
+##  &amp; CAPM &amp; Fama-French-Carhart &amp; Fama-French \\ 
+## \\[-1.8ex] &amp; (1) &amp; (2) &amp; (3)\\ 
+## \hline \\[-1.8ex] 
+##  MKT &amp; 1.075$^{***}$ &amp; 1.084$^{***}$ &amp; 1.084$^{***}$ \\ 
+##   &amp; (0.037) &amp; (0.036) &amp; (0.036) \\ 
+##   &amp; &amp; &amp; \\ 
+##  SMB &amp;  &amp; $-$0.049 &amp; $-$0.049 \\ 
+##   &amp;  &amp; (0.074) &amp; (0.074) \\ 
+##   &amp; &amp; &amp; \\ 
+##  HML &amp;  &amp; 0.548$^{***}$ &amp; 0.548$^{***}$ \\ 
+##   &amp;  &amp; (0.097) &amp; (0.097) \\ 
+##   &amp; &amp; &amp; \\ 
+##  Constant &amp; $-$0.0003 &amp; $-$0.0004 &amp; $-$0.0004 \\ 
+##   &amp; (0.001) &amp; (0.001) &amp; (0.001) \\ 
+##   &amp; &amp; &amp; \\ 
+## \hline \\[-1.8ex] 
+## Observations &amp; 547 &amp; 547 &amp; 547 \\ 
+## R$^{2}$ &amp; 0.613 &amp; 0.636 &amp; 0.636 \\ 
+## Adjusted R$^{2}$ &amp; 0.613 &amp; 0.634 &amp; 0.634 \\ 
+## Residual Std. Error &amp; 0.017 (df = 545) &amp; 0.017 (df = 543) &amp; 0.017 (df = 543) \\ 
+## F Statistic &amp; 864.041$^{***}$ (df = 1; 545) &amp; 316.587$^{***}$ (df = 3; 543) &amp; 316.587$^{***}$ (df = 3; 543) \\ 
+## \hline 
+## \hline \\[-1.8ex] 
+## \textit{Note:}  &amp; \multicolumn{3}{r}{$^{*}$p$&lt;$0.1; $^{**}$p$&lt;$0.05; $^{***}$p$&lt;$0.01} \\ 
+## \end{tabular} 
+## \end{table}</code></pre>
 </div>
 </div>
 <div id="creditos" class="section level2">

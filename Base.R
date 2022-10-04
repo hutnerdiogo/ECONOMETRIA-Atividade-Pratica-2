@@ -100,4 +100,5 @@ stargazer(CAPM_CMIG4,modelo_FFC_CMIG4,modelo_FF_CMIG4, type = "html", title = "C
           column.labels=c("CAPM","Fama-French-Carhart","Fama-French"),
           dep.var.labels.include=F)
 
-
+setwd("Output")
+getwd()
