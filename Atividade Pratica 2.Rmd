@@ -64,6 +64,7 @@ plot(data$Data,data$CMIG4,col="Blue",
      main = "Retorno por dia da CMIG4")
 abline(v=18320,col="Red")
 ```
+  * Data inicial da pandemia indicada pela linha vermelha (2020-03-01)
   Podemos observar que as três empresas apresentavam retornos relativamente constantes e não muito dispersos. Particularmente, a Petrobrás é a  que apresenta um retorno mais centrado no 0, enquanto a Cemig e o Banco do Brasil apresentam retornos um pouco mais dispersos, mas também perto do 0. Agora, na época da pandemia do Covid-19, podemos observar uma grande dispersão dos retornos, formando quase uma linha vertical no gráfico, o que indica que os retornos foram mais inconstantes nesse período inicial da pandemia. Agora, como as duas empresas são muito consistentes no mercado, pouco tempo depois da pandemia, elas já voltaram a ter retornos mais pre-pandemia.
 
 ## Questão 3:
@@ -115,7 +116,7 @@ CAPM_PETR4 <- lm(PETR4 ~ MKT,data = data)
 ```{r}
 CAPM_CMIG4 <- lm(CMIG4 ~ MKT,data = data)
 ```
-  Já na Cemig, o alfa tem valor numérico de -0,0004622, mas mais uma vez possui um P-valor superior à 5%, o que faz com que ele seja descartado do modelo. Agora, caso tivesse valor significativo, indicaria o retorno da empresa que não depende da variável analisada. Já o ativo beta tem valor numérico igual a 1,0755346 e um P-valor inferior à 5%, o que indica, mais uma vez, que o ativo é mais volátil que o mercado.
+  Já na Cemig, o alfa tem valor numérico de -0,0003041, mas mais uma vez possui um P-valor superior à 5%, o que faz com que ele seja insignificante. Agora, caso tivesse valor significativo, indicaria o retorno da empresa que não depende da variável analisada. Já o ativo beta tem valor numérico igual a 1,0754770 e um P-valor inferior à 5%, o que indica, mais uma vez, que o ativo é mais volátil que o mercado, mas menos que os outros ativos.
 
 ## Questão 5:
 

@@ -67,6 +67,7 @@ summary(CAPM_PETR4)
 CAPM_CMIG4 <- lm(CMIG4 ~ MKT,data = data)
 summary(CAPM_CMIG4)
 
+plot(predict(CAPM_PETR4))
 #### Questão 5 ####
 #Analise o poder explicativo -> Docs da Joana
 
