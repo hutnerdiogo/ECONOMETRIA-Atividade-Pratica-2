@@ -1,0 +1,211 @@
+---
+title: "Atividade prática n. 2"
+author: "Grupo 9"
+date: "04 de outubro de 2022"
+output:
+  html_document: default
+  pdf_document:
+    keep_tex: yes
+  word_document: default
+---
+
+**Relatório do grupo 9**
+
+Tema: *relatório completo sobre investimento em empresas estatais*
+
+## Questão 0:
+
+Iniciando os modulos, os dados para as analises e as funções necessarias
+
+```{r, message = FALSE}
+#install.packages("stargazer")
+library(stargazer)
+```
+
+## Questão 1:
+
+   Baixe o relatório e declare no R que a coluna Data contém informações temporais.
+
+```{r}
+data <- read.csv("ArquivoExercicio2.csv",sep=";",header=TRUE)
+
+data$Data <- as.Date(data$Data)
+```
+
+## Questão 2:
+
+  Crie 6 vetores 2x1 contendo informações sobre média, mediana, mínimo, máximo, variância o desvio padrão do PL e Ret. E seguida, compile os vetores em uma única tabela utilizando o comando cbind.data.frame.
+
+```{r}
+media <- c(mean(dados$`PL em milhoes`),mean(dados$Retorno))
+mediana <- c(median(dados$`PL em milhoes`),median(dados$Retorno))
+minimo <- c(min(dados$`PL em milhoes`),min(dados$Retorno))
+maximo <- c(max(dados$`PL em milhoes`),max(dados$Retorno))
+desvio_padrao <- c(sd(dados$`PL em milhoes`),sd(dados$Retorno))
+variancia <- c(var(dados$`PL em milhoes`),var(dados$Retorno))
+enriched_data <- cbind.data.frame(media,mediana,minimo,maximo, desvio_padrao,variancia)
+round_df(enriched_data,5)
+```
+
+## Questão 3:
+
+A covariância e correlação entre PL e Ret
+
+```{r}
+covariancia <- cov(dados$`PL em milhoes`,dados$Retorno)
+correlacao <- cor(dados$`PL em milhoes`,dados$Retorno)
+paste("Covariancia:",covariancia)
+paste("Correlacao:",correlacao)
+```
+
+## Questão 4:
+
+Crie um modelo linear para captar a relação entre Ret e PL. Reti = A + BPLi + Ei
+
+```{r}
+x <- dados$`PL em milhoes`
+y <- dados$Retorno
+reg <- lm(y ~ x)
+```
+
+## Questão 5:
+
+Insira no gráfico de dispersão anterior uma linha que representa o modelo linear na cor azul.
+
+```{r}
+#Grafico Anterior:
+plot(dados$`PL em milhoes`, dados$Retorno,
+     pch  = 8,
+     col  = "green",
+     lwd  = 5,
+     main = "Relação entre Retorno e Patrimonio liquido de fundos de investimento",
+     xlab = "Patrimonio Liquido do fundo",
+     ylab = "Retorno do fundo")
+#Linha Azul:
+abline(reg, col=4)
+```
+
+## Questão 6:
+
+Mostre o resultado do modelo e a adequabilidade da modelagem.
+
+```{r,echo = FALSE}
+
+coeficientes <- coef(reg)
+paste("Coeficiente do intercepto:",coeficientes[1])
+paste("Coeficiente do X:",coeficientes[2])
+```
+
+O resultado do modelo são os coeficientes citados a cima
+
+```{r}
+reg_slm <- summary(reg)
+paste("P valor do intercepto=",reg_slm$coefficients[1,4])
+paste("P valor do Coeficiente=",reg_slm$coefficients[2,4])
+```
+
+A adequabilidade não é das melhores, o P valor do intercepto é alto, fazendo assim ter grandes chances de fazer parte de um resultado nulo, já o do coeficiente tem sua importancia
+
+## Questão 7
+
+Analise o poder explicativo do modelo.
+
+```{r, echo = FALSE}
+paste("R2 do modelo =",reg_slm$r.squared)
+```
+O poder explicativo do modelo é 53,5% o R², ou seja, 53,5% dos resultados dos fundos podem ser explicados pelo fator PL, uma chance consideravel para um modelo de apenas uma variavel
+
+## Questão 8
+
+Analise o significado do valor e significância de 𝛼 e 𝛽 gerados a um nível de
+significância de 5%
+```{r}
+
+paste("P valor do intercepto=",reg_slm$coefficients[1,4])
+paste("P valor do Coeficiente=",reg_slm$coefficients[2,4])
+```
+  O p valor do intercepto é maior que 5% por isso faz a variavel ser pouco efetiva ao modelo tendo alta chance de fazer parte de uma hipotese nula,já o p valor do coeficiente é menor que 5%, por isso é significante
+  
+## Questão 9
+
+Crie uma expectativa de Ret para um fundo com PL igual a R$7.800,00.
+```{r}
+result <- reg_slm$coefficients[1,1] + reg_slm$coefficients[2,1] * 7800
+paste("Retorno esperado= ",round(result * 100,3),"%",sep="")
+```
+
+## Questão 10
+
+Faça uma nova estimação considerando agora um modelo sem intercepto (𝛼 = 0).
+```{r}
+x <- dados$`PL em milhoes`
+y <- dados$Retorno
+regSemAlfa <- lm(y ~ x - 1)
+```
+
+## Questão 11
+
+Insira no gráfico de dispersão a reta deste novo modelo na cor vermelha.
+```{r}
+#Grafico Anterior:
+plot(dados$`PL em milhoes`, dados$Retorno,
+     pch  = 8,
+     col  = "green",
+     lwd  = 5,
+     main = "Relação entre Retorno e Patrimonio liquido de fundos de investimento",
+     xlab = "Patrimonio Liquido do fundo",
+     ylab = "Retorno do fundo")
+#Linha Azul:
+abline(reg, col=4)
+
+#Linha vermelha nova:
+abline(regSemAlfa, col="red")
+```
+
+## Questão 12
+
+Analise a validade do modelo, poder explicativo do modelo e a magnitude e significância do B
+
+```{r}
+regSemAlfa_slm <- summary(regSemAlfa)
+paste("R2 do novo modelo=",regSemAlfa_slm$r.squared)
+paste("P valor do novo modelo=",glance(regSemAlfa)$p.value)
+paste("P valor do novo X=",regSemAlfa_slm$coefficients[,4])
+```
+
+O poder explicativo (R2) foi para 85% sendo um modelo mais adequado que o primeiro. O P Valor de x dele se tornou estatisticamente igual a 0 e o P Valor do modelo se tornou estatisticamente igual 0
+
+## Questão 13
+
+Compare os resultados dos dois modelos e justifique em termos estatísticos qual
+dos dois modelos é mais adequado.
+
+```{r}
+paste("R2 do novo modelo=",regSemAlfa_slm$r.squared)
+paste("P valor do novo modelo=",glance(regSemAlfa)$p.value)
+paste("R2 do antigo modelo=",reg_slm$r.squared)
+paste("P valor do Antigo modelo=",glance(reg)$p.value)
+paste("Melhoria do R2 = ", (regSemAlfa_slm$r.squared - reg_slm$r.squared)/ reg_slm$r.squared *100, "%", sep="")
+```
+O modelo novo é o mais adequado, estatisticamente falando. O R2, poder explicativo, dele foi maior e o novo P valor do novo é tão insignificante que na computação se tornou NA, ou seja, é um modelo mais adequado
+
+## Questão 14
+
+Responda a seu cliente qual a melhor opção de fundo para investir, os menores ou
+os maiores
+
+Mesmo com a regressão mais fraca, já demonstrava uma tendencia de fundos com patrimonios maiores terem mais retorno. Com a regressão mais adequada a tendencia foi confirmada, segundo o coeficiente de X:
+```{r}
+paste("Coeficiente de x", regSemAlfa_slm$coefficients[1])
+```
+ a cada variação de 1 milhão de PL do fundo, o rendimento tende a esse coeficiente maior, alem do mais a relação é positiva, ou seja, um aumenta, o outro tambem.
+
+## Questão 15:
+
+Por fim, levante hipóteses sobre outros fatores que podem impactar o ret de fundos
+de investimentos.
+
+Levando em consideração o artigo: [IMPACTO DA RELAÇÃO ENTRE TAXAS DE ADMINISTRAÇÃO E O TAMANHO DO FUNDO NA PERFORMANCE FUTURA DOS FUNDOS DE INVESTIMENTO](<https://convibra.org/congresso/res/uploads/pdf/artigo23093_20201802.pdf>)
+O *Patrimonio Liquido logaritimizado* apresenta uma *relação negativa*, juntamente com a *Taxa de administração* e a *Idade do fundo*, já por outro lado, apresentam uma *relação positiva* as variaveis *Taxa de performance* a *Taxa de administração ao quadrado*
+
+

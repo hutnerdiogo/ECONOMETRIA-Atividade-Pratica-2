@@ -85,8 +85,9 @@ summary(modelo_FF_CMIG4)
 # Testes
 
 ##  Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.
-stargazer(CAPM_BBSA3,modelo_FFC_BBSA3,modelo_FF_BBSA3, type = "html", title = "Comparação de regressões - BBSA3",
-          dep.var.labels=c("CAPM","Fama-French-Carhart","Fama-French"))
+stargazer(CAPM_BBSA3,modelo_FFC_BBSA3,modelo_FF_BBSA3, type = "latex", title = "Comparação de regressões - BBSA3",
+          column.labels=c("CAPM","Fama-French-Carhart","Fama-French"),
+          dep.var.labels.include=F)
 summary(modelo_FFC_BBSA3)
 
 
