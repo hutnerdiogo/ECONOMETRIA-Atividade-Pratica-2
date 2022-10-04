@@ -102,3 +102,9 @@ stargazer(CAPM_CMIG4,modelo_FFC_CMIG4,modelo_FF_CMIG4, type = "html", title = "C
 
 setwd("Output")
 getwd()
+
+stargazer(CAPM_PETR4,modelo_FFC_PETR4,modelo_FF_PETR4, title = "Comparação de regressões - PETR4",
+          column.labels=c("CAPM","Fama-French-Carhart","Fama-French"),
+          dep.var.labels.include=F,
+          digits = 4,
+          type="text")
