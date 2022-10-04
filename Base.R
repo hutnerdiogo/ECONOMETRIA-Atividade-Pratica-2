@@ -38,7 +38,18 @@ for (ativo in ativos){
 }
 
 rownames(excessos) <- data$Data
-excessos
+
+output <- matrix(,nrow=4,ncol=3)
+colnames(output) <- ativos
+estatisticas <- c("Minimo","Media","Maximo","Desvio Padrao")
+rownames(output) <- estatisticas
+for (ativo in ativos){
+  output["Minimo",ativo] <- min(excessos[,ativo])
+  output["Media",ativo] <- median(excessos[,ativo])
+  output["Maximo",ativo] <- max(excessos[,ativo])
+  output["Desvio Padrao",ativo] <- sd(excessos[,ativo])
+}
+output
 #### Questão 4 ####
 
 #("BBSA3","PETR4","CMIG4")
@@ -47,8 +58,6 @@ excessos
 CAPM_BBSA3 <- lm(BBSA3 ~ MKT,data = data)
 summary(CAPM_BBSA3)
 
-CAPM_BBSA3_SEM_ALFA <- lm(BBSA3 ~ MKT + 0,data = data)
-summary(CAPM_BBSA3_SEM_ALFA)
 
 # Ativo PETR4
 CAPM_PETR4 <- lm(PETR4 ~ MKT,data = data)

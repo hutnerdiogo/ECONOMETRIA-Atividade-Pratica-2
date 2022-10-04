@@ -7,6 +7,9 @@ output:
   pdf_document:
     keep_tex: yes
   word_document: default
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 **Relatório do grupo 9**
@@ -24,7 +27,8 @@ library(stargazer)
 
 ## Questão 1:
 
-   Baixe o relatório e declare no R que a coluna Data contém informações temporais.
+Baixe o relatório e declare no R que a coluna Data contém informações
+temporais.
 
 ```{r}
 data <- read.csv("ArquivoExercicio2.csv",sep=";",header=TRUE)
@@ -34,10 +38,11 @@ data$Data <- as.Date(data$Data)
 
 ## Questão 2:
 
-  Crie no R gráficos com os retornos dos 3 ativos ao longo do tempo. Analise os
-resultados dando destaque ao período da pandemia de COVID-19.
+Crie no R gráficos com os retornos dos 3 ativos ao longo do tempo.
+Analise os resultados dando destaque ao período da pandemia de COVID-19.
 
 Graficos da BBSA3
+
 ```{r}
 plot(data$Data,data$BBSA3,col="Blue",
      main = "Retorno por dia da BBSA3")
@@ -45,6 +50,7 @@ abline(v=18320,col="Red")
 ```
 
 Graficos da PETR4
+
 ```{r}
 plot(data$Data,data$PETR4,col="Blue",
      main = "Retorno por dia da PETR4")
@@ -52,21 +58,21 @@ abline(v=18320,col="Red")
 ```
 
 Graficos da CMIG4
+
 ```{r}
 plot(data$Data,data$CMIG4,col="Blue",
      main = "Retorno por dia da CMIG4")
 abline(v=18320,col="Red")
 ```
-
-
+  Podemos observar que as três empresas apresentavam retornos relativamente constantes e não muito dispersos. Particularmente, a Petrobrás é a  que apresenta um retorno mais centrado no 0, enquanto a Cemig e o Banco do Brasil apresentam retornos um pouco mais dispersos, mas também perto do 0. Agora, na época da pandemia do Covid-19, podemos observar uma grande dispersão dos retornos, formando quase uma linha vertical no gráfico, o que indica que os retornos foram mais inconstantes nesse período inicial da pandemia. Agora, como as duas empresas são muito consistentes no mercado, pouco tempo depois da pandemia, elas já voltaram a ter retornos mais pre-pandemia.
 
 ## Questão 3:
 
 Estime o excesso de retornos dos 3 ativos.
 
 ```{r}
-names(data)
 ativos <- c("BBSA3","PETR4","CMIG4")
+estatisticas <- c("Minimo","Media","Maximo","Desvio Padrao")
 
 excessos <- matrix(,nrow=547,ncol=3)
 colnames(excessos) <- ativos
@@ -76,22 +82,45 @@ for (ativo in ativos){
 }
 
 rownames(excessos) <- data$Data
-excessos
+
+output <- matrix(,nrow=4,ncol=3)
+colnames(output) <- ativos
+rownames(output) <- estatisticas
+
+for (ativo in ativos){
+  output["Minimo",ativo] <- min(excessos[,ativo])
+  output["Media",ativo] <- median(excessos[,ativo])
+  output["Maximo",ativo] <- max(excessos[,ativo])
+  output["Desvio Padrao",ativo] <- sd(excessos[,ativo])
+}
+output
 ```
 
 ## Questão 4:
 
-Crie um modelo linear para captar a relação entre Ret e PL. Reti = A + BPLi + Ei
-
+Para cada uma das ações, estime o modelo CAPM e analise do ponto de vista
+econométrico e financeiro os coeficientes A e B estimados
+### Ativo BBSA3
 ```{r}
-x <- dados$`PL em milhoes`
-y <- dados$Retorno
-reg <- lm(y ~ x)
+CAPM_BBSA3 <- lm(BBSA3 ~ MKT,data = data)
 ```
+  De acordo com o modelo, o alfa tem valor numérico de -0,0011616. Entretanto, o seu P-valor é de 10,80%, o que significa que o alfa tem mais que 5% de chance de pertencer a uma normal com média 0, o que pode fazer com que ele seja insignificante. Porém, caso ele tivesse valor significativo, financeiramente ele indicaria o retorno da empresa que não depende da variável analisada. Já o ativo beta tem valor numérico igual a 1,295843 e um P-valor bem menor do que 5%, o que faz com que o seu valor seja significativo para o modelo. O beta, por sua vez, indica a volatilidade do mercado, e, por ser maior que 1, indica que o ativo é mais volátil que o mercado. Alem do mais, uma variação positiva do mercado indica que o ativo tende a variar positivamente.
+### Ativo PETR4
+```{r}
+CAPM_PETR4 <- lm(PETR4 ~ MKT,data = data)
+```
+  Analisando esse ativo, o alfa tem valor numérico de -0.0008972. Porém, o seu P-valor também é bem alto, de 43,3%, o que significa que o alfa tem mais que 5% de chance de pertencer a uma normal com média 0, o que pode faz com que ele seja insignificante. Agora, caso tivesse valor significativo no modelo, financeiramente ele indicaria o retorno da empresa que não depende da variável analisada. Já o ativo beta tem valor numérico igual a 1,4451268 e um P-valor bem menor do que 5%, o que faz com que o seu valor seja significativo para o modelo. O beta, por sua vez indica a volatilidade do mercado, e, por ser, mais uma vez maior que 1, indica que o ativo é mais volátil que o mercado. Com uma variação positiva do mercado, o modelo indica que a variavel analisada tende a variar mais.
+
+### Ativo CMIG4 
+```{r}
+CAPM_CMIG4 <- lm(CMIG4 ~ MKT,data = data)
+```
+  Já na Cemig, o alfa tem valor numérico de -0,0004622, mas mais uma vez possui um P-valor superior à 5%, o que faz com que ele seja descartado do modelo. Agora, caso tivesse valor significativo, indicaria o retorno da empresa que não depende da variável analisada. Já o ativo beta tem valor numérico igual a 1,0755346 e um P-valor inferior à 5%, o que indica, mais uma vez, que o ativo é mais volátil que o mercado.
 
 ## Questão 5:
 
-Insira no gráfico de dispersão anterior uma linha que representa o modelo linear na cor azul.
+Insira no gráfico de dispersão anterior uma linha que representa o
+modelo linear na cor azul.
 
 ```{r}
 #Grafico Anterior:
@@ -125,7 +154,9 @@ paste("P valor do intercepto=",reg_slm$coefficients[1,4])
 paste("P valor do Coeficiente=",reg_slm$coefficients[2,4])
 ```
 
-A adequabilidade não é das melhores, o P valor do intercepto é alto, fazendo assim ter grandes chances de fazer parte de um resultado nulo, já o do coeficiente tem sua importancia
+A adequabilidade não é das melhores, o P valor do intercepto é alto,
+fazendo assim ter grandes chances de fazer parte de um resultado nulo,
+já o do coeficiente tem sua importancia
 
 ## Questão 7
 
@@ -134,22 +165,30 @@ Analise o poder explicativo do modelo.
 ```{r, echo = FALSE}
 paste("R2 do modelo =",reg_slm$r.squared)
 ```
-O poder explicativo do modelo é 53,5% o R², ou seja, 53,5% dos resultados dos fundos podem ser explicados pelo fator PL, uma chance consideravel para um modelo de apenas uma variavel
+
+O poder explicativo do modelo é 53,5% o R², ou seja, 53,5% dos
+resultados dos fundos podem ser explicados pelo fator PL, uma chance
+consideravel para um modelo de apenas uma variavel
 
 ## Questão 8
 
-Analise o significado do valor e significância de 𝛼 e 𝛽 gerados a um nível de
-significância de 5%
+Analise o significado do valor e significância de 𝛼 e 𝛽 gerados a um
+nível de significância de 5%
+
 ```{r}
 
 paste("P valor do intercepto=",reg_slm$coefficients[1,4])
 paste("P valor do Coeficiente=",reg_slm$coefficients[2,4])
 ```
-  O p valor do intercepto é maior que 5% por isso faz a variavel ser pouco efetiva ao modelo tendo alta chance de fazer parte de uma hipotese nula,já o p valor do coeficiente é menor que 5%, por isso é significante
-  
+
+O p valor do intercepto é maior que 5% por isso faz a variavel ser pouco
+efetiva ao modelo tendo alta chance de fazer parte de uma hipotese
+nula,já o p valor do coeficiente é menor que 5%, por isso é significante
+
 ## Questão 9
 
-Crie uma expectativa de Ret para um fundo com PL igual a R$7.800,00.
+Crie uma expectativa de Ret para um fundo com PL igual a R\$7.800,00.
+
 ```{r}
 result <- reg_slm$coefficients[1,1] + reg_slm$coefficients[2,1] * 7800
 paste("Retorno esperado= ",round(result * 100,3),"%",sep="")
@@ -157,7 +196,9 @@ paste("Retorno esperado= ",round(result * 100,3),"%",sep="")
 
 ## Questão 10
 
-Faça uma nova estimação considerando agora um modelo sem intercepto (𝛼 = 0).
+Faça uma nova estimação considerando agora um modelo sem intercepto (𝛼 =
+0).
+
 ```{r}
 x <- dados$`PL em milhoes`
 y <- dados$Retorno
@@ -167,6 +208,7 @@ regSemAlfa <- lm(y ~ x - 1)
 ## Questão 11
 
 Insira no gráfico de dispersão a reta deste novo modelo na cor vermelha.
+
 ```{r}
 #Grafico Anterior:
 plot(dados$`PL em milhoes`, dados$Retorno,
@@ -185,7 +227,8 @@ abline(regSemAlfa, col="red")
 
 ## Questão 12
 
-Analise a validade do modelo, poder explicativo do modelo e a magnitude e significância do B
+Analise a validade do modelo, poder explicativo do modelo e a magnitude
+e significância do B
 
 ```{r}
 regSemAlfa_slm <- summary(regSemAlfa)
@@ -194,12 +237,14 @@ paste("P valor do novo modelo=",glance(regSemAlfa)$p.value)
 paste("P valor do novo X=",regSemAlfa_slm$coefficients[,4])
 ```
 
-O poder explicativo (R2) foi para 85% sendo um modelo mais adequado que o primeiro. O P Valor de x dele se tornou estatisticamente igual a 0 e o P Valor do modelo se tornou estatisticamente igual 0
+O poder explicativo (R2) foi para 85% sendo um modelo mais adequado que
+o primeiro. O P Valor de x dele se tornou estatisticamente igual a 0 e o
+P Valor do modelo se tornou estatisticamente igual 0
 
 ## Questão 13
 
-Compare os resultados dos dois modelos e justifique em termos estatísticos qual
-dos dois modelos é mais adequado.
+Compare os resultados dos dois modelos e justifique em termos
+estatísticos qual dos dois modelos é mais adequado.
 
 ```{r}
 paste("R2 do novo modelo=",regSemAlfa_slm$r.squared)
@@ -208,25 +253,38 @@ paste("R2 do antigo modelo=",reg_slm$r.squared)
 paste("P valor do Antigo modelo=",glance(reg)$p.value)
 paste("Melhoria do R2 = ", (regSemAlfa_slm$r.squared - reg_slm$r.squared)/ reg_slm$r.squared *100, "%", sep="")
 ```
-O modelo novo é o mais adequado, estatisticamente falando. O R2, poder explicativo, dele foi maior e o novo P valor do novo é tão insignificante que na computação se tornou NA, ou seja, é um modelo mais adequado
+
+O modelo novo é o mais adequado, estatisticamente falando. O R2, poder
+explicativo, dele foi maior e o novo P valor do novo é tão
+insignificante que na computação se tornou NA, ou seja, é um modelo mais
+adequado
 
 ## Questão 14
 
-Responda a seu cliente qual a melhor opção de fundo para investir, os menores ou
-os maiores
+Responda a seu cliente qual a melhor opção de fundo para investir, os
+menores ou os maiores
 
-Mesmo com a regressão mais fraca, já demonstrava uma tendencia de fundos com patrimonios maiores terem mais retorno. Com a regressão mais adequada a tendencia foi confirmada, segundo o coeficiente de X:
+Mesmo com a regressão mais fraca, já demonstrava uma tendencia de fundos
+com patrimonios maiores terem mais retorno. Com a regressão mais
+adequada a tendencia foi confirmada, segundo o coeficiente de X:
+
 ```{r}
 paste("Coeficiente de x", regSemAlfa_slm$coefficients[1])
 ```
- a cada variação de 1 milhão de PL do fundo, o rendimento tende a esse coeficiente maior, alem do mais a relação é positiva, ou seja, um aumenta, o outro tambem.
+
+a cada variação de 1 milhão de PL do fundo, o rendimento tende a esse
+coeficiente maior, alem do mais a relação é positiva, ou seja, um
+aumenta, o outro tambem.
 
 ## Questão 15:
 
-Por fim, levante hipóteses sobre outros fatores que podem impactar o ret de fundos
-de investimentos.
+Por fim, levante hipóteses sobre outros fatores que podem impactar o ret
+de fundos de investimentos.
 
-Levando em consideração o artigo: [IMPACTO DA RELAÇÃO ENTRE TAXAS DE ADMINISTRAÇÃO E O TAMANHO DO FUNDO NA PERFORMANCE FUTURA DOS FUNDOS DE INVESTIMENTO](<https://convibra.org/congresso/res/uploads/pdf/artigo23093_20201802.pdf>)
-O *Patrimonio Liquido logaritimizado* apresenta uma *relação negativa*, juntamente com a *Taxa de administração* e a *Idade do fundo*, já por outro lado, apresentam uma *relação positiva* as variaveis *Taxa de performance* a *Taxa de administração ao quadrado*
-
-
+Levando em consideração o artigo: [IMPACTO DA RELAÇÃO ENTRE TAXAS DE
+ADMINISTRAÇÃO E O TAMANHO DO FUNDO NA PERFORMANCE FUTURA DOS FUNDOS DE
+INVESTIMENTO](https://convibra.org/congresso/res/uploads/pdf/artigo23093_20201802.pdf)
+O *Patrimonio Liquido logaritimizado* apresenta uma *relação negativa*,
+juntamente com a *Taxa de administração* e a *Idade do fundo*, já por
+outro lado, apresentam uma *relação positiva* as variaveis *Taxa de
+performance* a *Taxa de administração ao quadrado*
