@@ -81,30 +81,22 @@ modelo_FFC_CMIG4 <- lm(CMIG4 - RF ~ MKT + SMB + HML + WML,data=data)
 summary(modelo_FFC_CMIG4)
 
 #### Questão 7 ####
+##### Criando as regressões #####
 modelo_FF_BBSA3 <- lm(BBSA3 - RF ~ MKT + SMB + HML,data=data)
 
 modelo_FF_PETR4 <- lm(PETR4 - RF ~ MKT + SMB + HML,data=data)
 
 modelo_FF_CMIG4 <- lm(CMIG4 - RF ~ MKT + SMB + HML,data=data)
+##### Criando as tabelas #####
 
-
-stargazer(CAPM_BBSA3,modelo_FFC_BBSA3,modelo_FF_BBSA3, type = "html", title = "Comparação de regressões - BBSA3",
+stargazer(CAPM_BBSA3,modelo_FFC_BBSA3,modelo_FF_BBSA3, type = "text", title = "Comparação de regressões - BBSA3",
           column.labels=c("CAPM","Fama-French-Carhart","Fama-French"),
           dep.var.labels.include=F)
 
-stargazer(CAPM_PETR4,modelo_FFC_PETR4,modelo_FF_PETR4, type = "html", title = "Comparação de regressões - PETR4",
+stargazer(CAPM_PETR4,modelo_FFC_PETR4,modelo_FF_PETR4, type = "text", title = "Comparação de regressões - PETR4",
           column.labels=c("CAPM","Fama-French-Carhart","Fama-French"),
           dep.var.labels.include=F)
 
-stargazer(CAPM_CMIG4,modelo_FFC_CMIG4,modelo_FF_CMIG4, type = "html", title = "Comparação de regressões - CMIG4",
+stargazer(CAPM_CMIG4,modelo_FFC_CMIG4,modelo_FF_CMIG4, type = "text", title = "Comparação de regressões - CMIG4",
           column.labels=c("CAPM","Fama-French-Carhart","Fama-French"),
           dep.var.labels.include=F)
-
-setwd("Output")
-getwd()
-
-stargazer(CAPM_PETR4,modelo_FFC_PETR4,modelo_FF_PETR4, title = "Comparação de regressões - PETR4",
-          column.labels=c("CAPM","Fama-French-Carhart","Fama-French"),
-          dep.var.labels.include=F,
-          digits = 4,
-          type="text")
