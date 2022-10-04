@@ -6,11 +6,15 @@ data$Data <- as.Date(data$Data)
 
 #### Questão 2 ####
 # Plotando Graficos
-plot(data$Data,data$BBSA3,col="Blue")
-
-plot(data$Data,data$PETR4,col="Purple")
-
-plot(data$Data,data$CMIG4,col="Orange")
+plot(data$Data,data$BBSA3,col="Blue",
+     main = "Retorno por dia da BBSA3")
+abline(v=18320,col="Red")
+plot(data$Data,data$PETR4,col="Purple",
+     main = "Retorno por dia da PETR4")
+abline(v=18320,col="Red")
+plot(data$Data,data$CMIG4,col="Orange",
+     main = "Retorno por dia da CMIG4")
+abline(v=18320,col="Red")
 
 #Analise
 #'registrar linhas verticas, mas são os pontos
