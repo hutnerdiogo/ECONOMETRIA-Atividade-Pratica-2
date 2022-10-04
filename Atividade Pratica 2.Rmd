@@ -120,172 +120,66 @@ CAPM_CMIG4 <- lm(CMIG4 ~ MKT,data = data)
 
 ## Questão 5:
 
-Insira no gráfico de dispersão anterior uma linha que representa o
-modelo linear na cor azul.
+Analise o poder explicativos dos modelos.
 
-```{r}
-#Grafico Anterior:
-plot(dados$`PL em milhoes`, dados$Retorno,
-     pch  = 8,
-     col  = "green",
-     lwd  = 5,
-     main = "Relação entre Retorno e Patrimonio liquido de fundos de investimento",
-     xlab = "Patrimonio Liquido do fundo",
-     ylab = "Retorno do fundo")
-#Linha Azul:
-abline(reg, col=4)
-```
-
+  O poder explicativo dos modelos pode ser avaliado a partir do R quadrado de cada modelo, já que estamos lidando com uma regressão linear de uma unica variavel. Desse modo, o modelo do ativo BBSA3 possui um R quadrado de 0,7087, o que significa que 70,87% da variável é explicada pelo modelo. Já no ativo PETR4 o R-quadrado vale 0,5449, o que significa que 54,49% da variável é explicada pelo modelo. Por fim, o ativo CMIG4 possui um R-quadrado de 0,6362, que significa que 63,62% da variável é explicada pelo modelo.
+  
 ## Questão 6:
 
-Mostre o resultado do modelo e a adequabilidade da modelagem.
+  Estime o modelo proposto por Fama-French-Carhart para as 3 ações e analise os
+resultados, cuja especificação se encontra abaixo:
 
-```{r,echo = FALSE}
-
-coeficientes <- coef(reg)
-paste("Coeficiente do intercepto:",coeficientes[1])
-paste("Coeficiente do X:",coeficientes[2])
-```
-
-O resultado do modelo são os coeficientes citados a cima
-
+### BBSA3
 ```{r}
-reg_slm <- summary(reg)
-paste("P valor do intercepto=",reg_slm$coefficients[1,4])
-paste("P valor do Coeficiente=",reg_slm$coefficients[2,4])
+modelo_FFC_BBSA3 <- lm(BBSA3 - RF ~ MKT + SMB + HML,data=data)
 ```
 
-A adequabilidade não é das melhores, o P valor do intercepto é alto,
-fazendo assim ter grandes chances de fazer parte de um resultado nulo,
-já o do coeficiente tem sua importancia
-
-## Questão 7
-
-Analise o poder explicativo do modelo.
-
-```{r, echo = FALSE}
-paste("R2 do modelo =",reg_slm$r.squared)
-```
-
-O poder explicativo do modelo é 53,5% o R², ou seja, 53,5% dos
-resultados dos fundos podem ser explicados pelo fator PL, uma chance
-consideravel para um modelo de apenas uma variavel
-
-## Questão 8
-
-Analise o significado do valor e significância de 𝛼 e 𝛽 gerados a um
-nível de significância de 5%
-
+### PETR4
 ```{r}
-
-paste("P valor do intercepto=",reg_slm$coefficients[1,4])
-paste("P valor do Coeficiente=",reg_slm$coefficients[2,4])
+modelo_FFC_PETR4 <- lm(PETR4 - RF ~ MKT + SMB + HML,data=data)
 ```
 
-O p valor do intercepto é maior que 5% por isso faz a variavel ser pouco
-efetiva ao modelo tendo alta chance de fazer parte de uma hipotese
-nula,já o p valor do coeficiente é menor que 5%, por isso é significante
-
-## Questão 9
-
-Crie uma expectativa de Ret para um fundo com PL igual a R\$7.800,00.
-
+### CMIG4
 ```{r}
-result <- reg_slm$coefficients[1,1] + reg_slm$coefficients[2,1] * 7800
-paste("Retorno esperado= ",round(result * 100,3),"%",sep="")
+modelo_FFC_CMIG4 <- lm(CMIG4 - RF ~ MKT + SMB + HML,data=data)
 ```
 
-## Questão 10
-
-Faça uma nova estimação considerando agora um modelo sem intercepto (𝛼 =
-0).
-
+## Questão 7:
+  Estime agora o modelo de Fama-French e o de Fama-French-Carhart para explicar
+os retornos do portfólio. Monte uma tabela comparativa entre modelo CAPM e os
+2 modelos gerados e analise os resultados. O modelo de Fama-French tem a
+seguinte especificação
+### Iniciando os modelos
 ```{r}
-x <- dados$`PL em milhoes`
-y <- dados$Retorno
-regSemAlfa <- lm(y ~ x - 1)
+modelo_FF_BBSA3 <- lm(BBSA3 - RF ~ MKT + SMB + HML,data=data)
+
+modelo_FF_PETR4 <- lm(PETR4 - RF ~ MKT + SMB + HML,data=data)
+
+modelo_FF_CMIG4 <- lm(CMIG4 - RF ~ MKT + SMB + HML,data=data)
 ```
 
-## Questão 11
 
-Insira no gráfico de dispersão a reta deste novo modelo na cor vermelha.
-
+### BBSA3
 ```{r}
-#Grafico Anterior:
-plot(dados$`PL em milhoes`, dados$Retorno,
-     pch  = 8,
-     col  = "green",
-     lwd  = 5,
-     main = "Relação entre Retorno e Patrimonio liquido de fundos de investimento",
-     xlab = "Patrimonio Liquido do fundo",
-     ylab = "Retorno do fundo")
-#Linha Azul:
-abline(reg, col=4)
-
-#Linha vermelha nova:
-abline(regSemAlfa, col="red")
+stargazer(CAPM_BBSA3,modelo_FFC_BBSA3,modelo_FF_BBSA3, type = "html", title = "Comparação de regressões - BBSA3",
+          column.labels=c("CAPM","Fama-French-Carhart","Fama-French"),
+          dep.var.labels.include=F)
 ```
 
-## Questão 12
-
-Analise a validade do modelo, poder explicativo do modelo e a magnitude
-e significância do B
-
+### PETR4
 ```{r}
-regSemAlfa_slm <- summary(regSemAlfa)
-paste("R2 do novo modelo=",regSemAlfa_slm$r.squared)
-paste("P valor do novo modelo=",glance(regSemAlfa)$p.value)
-paste("P valor do novo X=",regSemAlfa_slm$coefficients[,4])
+stargazer(CAPM_PETR4,modelo_FFC_PETR4,modelo_FF_PETR4, type = "html", title = "Comparação de regressões - PETR4",
+          column.labels=c("CAPM","Fama-French-Carhart","Fama-French"),
+          dep.var.labels.include=F)
 ```
 
-O poder explicativo (R2) foi para 85% sendo um modelo mais adequado que
-o primeiro. O P Valor de x dele se tornou estatisticamente igual a 0 e o
-P Valor do modelo se tornou estatisticamente igual 0
-
-## Questão 13
-
-Compare os resultados dos dois modelos e justifique em termos
-estatísticos qual dos dois modelos é mais adequado.
-
+### CMIG4
 ```{r}
-paste("R2 do novo modelo=",regSemAlfa_slm$r.squared)
-paste("P valor do novo modelo=",glance(regSemAlfa)$p.value)
-paste("R2 do antigo modelo=",reg_slm$r.squared)
-paste("P valor do Antigo modelo=",glance(reg)$p.value)
-paste("Melhoria do R2 = ", (regSemAlfa_slm$r.squared - reg_slm$r.squared)/ reg_slm$r.squared *100, "%", sep="")
+stargazer(CAPM_CMIG4,modelo_FFC_CMIG4,modelo_FF_CMIG4, type = "html", title = "Comparação de regressões - CMIG4",
+          column.labels=c("CAPM","Fama-French-Carhart","Fama-French"),
+          dep.var.labels.include=F)
+
 ```
 
-O modelo novo é o mais adequado, estatisticamente falando. O R2, poder
-explicativo, dele foi maior e o novo P valor do novo é tão
-insignificante que na computação se tornou NA, ou seja, é um modelo mais
-adequado
-
-## Questão 14
-
-Responda a seu cliente qual a melhor opção de fundo para investir, os
-menores ou os maiores
-
-Mesmo com a regressão mais fraca, já demonstrava uma tendencia de fundos
-com patrimonios maiores terem mais retorno. Com a regressão mais
-adequada a tendencia foi confirmada, segundo o coeficiente de X:
-
-```{r}
-paste("Coeficiente de x", regSemAlfa_slm$coefficients[1])
-```
-
-a cada variação de 1 milhão de PL do fundo, o rendimento tende a esse
-coeficiente maior, alem do mais a relação é positiva, ou seja, um
-aumenta, o outro tambem.
-
-## Questão 15:
-
-Por fim, levante hipóteses sobre outros fatores que podem impactar o ret
-de fundos de investimentos.
-
-Levando em consideração o artigo: [IMPACTO DA RELAÇÃO ENTRE TAXAS DE
-ADMINISTRAÇÃO E O TAMANHO DO FUNDO NA PERFORMANCE FUTURA DOS FUNDOS DE
-INVESTIMENTO](https://convibra.org/congresso/res/uploads/pdf/artigo23093_20201802.pdf)
-O *Patrimonio Liquido logaritimizado* apresenta uma *relação negativa*,
-juntamente com a *Taxa de administração* e a *Idade do fundo*, já por
-outro lado, apresentam uma *relação positiva* as variaveis *Taxa de
-performance* a *Taxa de administração ao quadrado*
+## Creditos: 
+*Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.*
