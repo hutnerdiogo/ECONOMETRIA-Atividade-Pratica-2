@@ -34,28 +34,49 @@ data$Data <- as.Date(data$Data)
 
 ## Questão 2:
 
-  Crie 6 vetores 2x1 contendo informações sobre média, mediana, mínimo, máximo, variância o desvio padrão do PL e Ret. E seguida, compile os vetores em uma única tabela utilizando o comando cbind.data.frame.
+  Crie no R gráficos com os retornos dos 3 ativos ao longo do tempo. Analise os
+resultados dando destaque ao período da pandemia de COVID-19.
 
+Graficos da BBSA3
 ```{r}
-media <- c(mean(dados$`PL em milhoes`),mean(dados$Retorno))
-mediana <- c(median(dados$`PL em milhoes`),median(dados$Retorno))
-minimo <- c(min(dados$`PL em milhoes`),min(dados$Retorno))
-maximo <- c(max(dados$`PL em milhoes`),max(dados$Retorno))
-desvio_padrao <- c(sd(dados$`PL em milhoes`),sd(dados$Retorno))
-variancia <- c(var(dados$`PL em milhoes`),var(dados$Retorno))
-enriched_data <- cbind.data.frame(media,mediana,minimo,maximo, desvio_padrao,variancia)
-round_df(enriched_data,5)
+plot(data$Data,data$BBSA3,col="Blue",
+     main = "Retorno por dia da BBSA3")
+abline(v=18320,col="Red")
 ```
+
+Graficos da PETR4
+```{r}
+plot(data$Data,data$PETR4,col="Blue",
+     main = "Retorno por dia da PETR4")
+abline(v=18320,col="Red")
+```
+
+Graficos da CMIG4
+```{r}
+plot(data$Data,data$CMIG4,col="Blue",
+     main = "Retorno por dia da CMIG4")
+abline(v=18320,col="Red")
+```
+
+
 
 ## Questão 3:
 
-A covariância e correlação entre PL e Ret
+Estime o excesso de retornos dos 3 ativos.
 
 ```{r}
-covariancia <- cov(dados$`PL em milhoes`,dados$Retorno)
-correlacao <- cor(dados$`PL em milhoes`,dados$Retorno)
-paste("Covariancia:",covariancia)
-paste("Correlacao:",correlacao)
+names(data)
+ativos <- c("BBSA3","PETR4","CMIG4")
+
+excessos <- matrix(,nrow=547,ncol=3)
+colnames(excessos) <- ativos
+
+for (ativo in ativos){
+  excessos[,ativo] <- data[,ativo] - data$RF
+}
+
+rownames(excessos) <- data$Data
+excessos
 ```
 
 ## Questão 4:
