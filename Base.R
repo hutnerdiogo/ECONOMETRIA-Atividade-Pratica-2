@@ -102,3 +102,22 @@ stargazer(CAPM_CMIG4,modelo_FFC_CMIG4,modelo_FF_CMIG4, type = "text", title = "C
           dep.var.labels.include=F)
 
 ##### Questão 8 #####
+
+
+results <- matrix(,
+                  nrow = 10000,
+                  ncol = 5)
+name_coeficientes <- c("Alfa", "MKT", "SMB", "HML", "WML")
+colnames(results) <- name_coeficientes
+for (i in 1: 10000){
+  index_amostras <- sample(1:547,300,T)
+  amostra <- data[index_amostras,]
+  mod <- lm(PORT-RF ~ MKT + SMB + HML + WML ,data=amostra)
+  results[i,] <- mod$coefficients
+}
+
+par(mfrow=c(2,3))
+for (name in name_coeficientes){
+  Hist<-hist(results[,name], plot=F, breaks = 100)
+  plot(Hist, main=name, xlab="",col=ifelse(Hist$breaks <= quantile(results[,name],0.025) , "red", ifelse (Hist$breaks >=quantile(results[,name],0.975), "red", "white")))
+}                                                 
