@@ -132,6 +132,6 @@ for (coeficiente in name_coeficientes){
   output["Maximo",coeficiente] <- max(results[,coeficiente])
   output["Desvio Padrao",coeficiente] <- sd(results[,coeficiente])
 }
-
+ 
 mod_completo <- lm(PORT-RF ~ MKT + SMB + HML + WML ,data=data)
 mod_completo$coefficients
