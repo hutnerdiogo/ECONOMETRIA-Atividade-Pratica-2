@@ -100,3 +100,5 @@ stargazer(CAPM_PETR4,modelo_FFC_PETR4,modelo_FF_PETR4, type = "text", title = "C
 stargazer(CAPM_CMIG4,modelo_FFC_CMIG4,modelo_FF_CMIG4, type = "text", title = "Comparação de regressões - CMIG4",
           column.labels=c("CAPM","Fama-French-Carhart","Fama-French"),
           dep.var.labels.include=F)
+
+##### Questão 8 #####
