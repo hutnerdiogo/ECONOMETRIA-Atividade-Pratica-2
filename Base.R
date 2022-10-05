@@ -121,3 +121,17 @@ for (name in name_coeficientes){
   Hist<-hist(results[,name], plot=F, breaks = 100)
   plot(Hist, main=name, xlab="",col=ifelse(Hist$breaks <= quantile(results[,name],0.025) , "red", ifelse (Hist$breaks >=quantile(results[,name],0.975), "red", "white")))
 }                                                 
+
+output <- matrix(,nrow=4,ncol=5)
+colnames(output) <- name_coeficientes
+estatisticas <- c("Minimo","Media","Maximo","Desvio Padrao")
+rownames(output) <- estatisticas
+for (coeficiente in name_coeficientes){
+  output["Minimo",coeficiente] <- min(results[,coeficiente])
+  output["Media",coeficiente] <- median(results[,coeficiente])
+  output["Maximo",coeficiente] <- max(results[,coeficiente])
+  output["Desvio Padrao",coeficiente] <- sd(results[,coeficiente])
+}
+
+mod_completo <- lm(PORT-RF ~ MKT + SMB + HML + WML ,data=data)
+mod_completo$coefficients
