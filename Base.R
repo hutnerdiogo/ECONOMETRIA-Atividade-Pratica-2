@@ -89,10 +89,14 @@ modelo_FF_PETR4 <- lm(PETR4 - RF ~ MKT + SMB + HML,data=data)
 modelo_FF_CMIG4 <- lm(CMIG4 - RF ~ MKT + SMB + HML,data=data)
 ##### Criando as tabelas #####
 
-stargazer(CAPM_BBSA3,modelo_FFC_BBSA3,modelo_FF_BBSA3, type = "text", title = "Comparação de regressões - BBSA3",
+fileConn<-file("tabelateste.html")
+saida <- stargazer(CAPM_BBSA3,modelo_FFC_BBSA3,modelo_FF_BBSA3, type = "html", title = "Comparação de regressões - BBSA3",
           column.labels=c("CAPM","Fama-French-Carhart","Fama-French"),
           dep.var.labels.include=F)
 
+writeLines(saida, fileConn)
+close(fileConn)
+summary(modelo_FFC_BBSA3)
 stargazer(CAPM_PETR4,modelo_FFC_PETR4,modelo_FF_PETR4, type = "text", title = "Comparação de regressões - PETR4",
           column.labels=c("CAPM","Fama-French-Carhart","Fama-French"),
           dep.var.labels.include=F)
